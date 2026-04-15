@@ -1,0 +1,42 @@
+{
+  "name": "codebase-roast",
+  "version": "1.0.0",
+  "description": "Roast any GitHub repository with AI-powered technical humor, backed by any LLM provider",
+  "bin": {
+    "codebase-roast": "./dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node src/index.ts",
+    "prepare": "npm run build",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "openai": "^4.77.0",
+    "simple-git": "^3.27.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "code-review",
+    "ai",
+    "claude",
+    "openai",
+    "nebius",
+    "github",
+    "roast",
+    "humor",
+    "cli"
+  ],
+  "license": "MIT"
+}
