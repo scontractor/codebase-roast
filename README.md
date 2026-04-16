@@ -1,73 +1,43 @@
-# codebase-roast 🔥
-
-> Roast any GitHub repository with AI-powered technical humor, backed by Claude.
-
-```
-npx codebase-roast https://github.com/owner/repo
-```
+> *"If I see one more FactoryFactory interface for a string concatenation, I'm committing arson."*
+> — Claude AI, roasting FizzBuzzEnterpriseEdition, 2025
 
 ---
 
-## What it does
+# CODEBASE ROAST 🔥 — Does Your Code Deserve to Burn?
 
-1. **Clones** the repo to a temp folder (`--depth=1`)
-2. **Analyses** the code for:
-   - Very long files (> 300 lines)
-   - Very long functions (> 50 lines)
-   - Bad or generic variable naming (`temp`, `data`, single-letter vars)
-   - Missing README
-   - Missing comments (flagged when > 30% of files have none)
-   - Copy-pasted code blocks (chunk hashing across files)
-   - High cyclomatic complexity / deep nesting
-3. **Generates** a funny but technically accurate roast using Claude Opus
-4. **Prints** a coloured terminal report and saves a markdown file
-5. **Cleans up** the temp folder
+[![MIT License](https://img.shields.io/badge/license-MIT-red.svg)](LICENSE)
+[![npm](https://img.shields.io/npm/v/codebase-roast?color=ff4500)](https://www.npmjs.com/package/codebase-roast)
+[![Live Demo](https://img.shields.io/badge/live_demo-vercel-black)](https://codebase-roast.vercel.app)
 
-## Output
+AI-powered code roasts. Paste a GitHub URL. Get destroyed. Learn something.  
+Backed by Claude Opus — the only LLM brave enough to tell you what your tech lead won't.
 
-```
-🔥  CODEBASE ROAST: owner/repo
-────────────────────────────────────────────────────────────
+---
 
-ROAST SCORE
-  4/10  ████░░░░░░
-  More red flags than a Formula 1 race. Please seek help.
+## ✨ Live Demo
 
-THE ROAST
-  This codebase reads like a developer discovered the concept
-  of "it works on my machine" and decided to ship it as a
-  philosophy. 1,247-line files, zero comments, and enough
-  copy-paste to make Ctrl+V file a restraining order.
+**[codebase-roast.vercel.app](https://codebase-roast.vercel.app)** — no install, runs in your browser.
 
-SPECIFIC CALLOUTS
+![Screenshot placeholder — add your own after first deploy](https://via.placeholder.com/720x400/080808/ff4500?text=codebase-roast+screenshot)
 
-  1. The Monolith Strikes Back
-     📁 src/everything.ts
+---
 
-     At 1,247 lines, this file handles authentication,
-     database queries, email sending, and presumably your
-     taxes. The Single Responsibility Principle has left
-     the chat.
+## ⚙️ How It Works
 
-  ...
+1. **Analyse** — fetches up to 40 source files via the GitHub API and runs static analysis: long files, long functions, bad naming, copy-paste blocks, missing README, missing comments, high nesting complexity
+2. **Roast** — sends the analysis to Claude Opus, which responds with a JSON roast: score, callouts, and a savage final sentence
+3. **Report** — renders a colour-coded terminal report and saves a markdown file (CLI), or displays an animated results page (web)
 
-FINAL VERDICT
+---
 
-  "Sentenced to six months of mandatory refactoring, with
-  possible parole if you write at least one comment."
-```
-
-A markdown report is also saved as `<repo-name>-roast.md`.
-
-## Setup
-
-Pick **one** provider and export the relevant key, then run:
+## 🖥️ CLI
 
 ```bash
+# Run directly — no install needed
 npx codebase-roast https://github.com/owner/repo
 ```
 
-### Providers (first match wins)
+### Provider setup (first match wins)
 
 | Provider | Environment variable | Default model |
 |---|---|---|
@@ -78,22 +48,7 @@ npx codebase-roast https://github.com/owner/repo
 
 Override the model for any provider with `LLM_MODEL=<model-id>`.
 
-```bash
-# Anthropic
-export ANTHROPIC_API_KEY=sk-ant-...
-
-# Nebius AI Studio
-export NEBIUS_API_KEY=...
-
-# OpenAI
-export OPENAI_API_KEY=sk-...
-
-# Ollama (local)
-export LLM_BASE_URL=http://localhost:11434/v1
-export LLM_MODEL=llama3.1
-```
-
-## Development
+### Development
 
 ```bash
 git clone https://github.com/your-username/codebase-roast
@@ -101,20 +56,136 @@ cd codebase-roast
 npm install
 npm run build
 node dist/index.js https://github.com/owner/repo
-```
 
-Or use `ts-node` for development:
-
-```bash
+# or with ts-node
 npm run dev https://github.com/owner/repo
 ```
 
-## Requirements
+---
 
-- Node.js ≥ 18
-- `git` installed and on your PATH
-- At least one LLM provider key (see Setup above)
+## 🌐 Web App
 
-## License
+The `web/` folder is a Next.js app you can deploy to Vercel in one click.
+
+**Features:** glitchcore UI · browser-side Anthropic API calls (key never leaves your browser) · animated roast progress · Share on X button
+
+```bash
+cd web
+npm install
+npm run dev        # http://localhost:3000
+npm run build      # production build
+```
+
+**Deploy to Vercel:** import the repo, set **Root Directory** to `web/`, done.
+
+---
+
+## 📋 Sample Output
+
+```
+🔥  codebase-roast — Anthropic / claude-opus-4-6
+──────────────────────────────────────────────────
+
+📦  Cloning https://github.com/EnterpriseQualityCoding/FizzBuzzEnterpriseEdition …
+    ✓ Cloned
+
+🔍  Analysing codebase …
+    ✓ 40 files · 2,731 lines · 18 issues
+
+🎤  Generating roast (this may take ~20 s) …
+    ✓ Roast generated
+    ✓ Temp files cleaned up
+```
+
+### Roast Score
+
+```
+2/10  ██░░░░░░░░
+ABANDON ALL HOPE
+```
+
+### The Roast
+
+> You've successfully transformed a 5-line script into a 2,700-line enterprise-grade monument
+> to YAGNI violations. This isn't FizzBuzz; it's a job security scheme written in Java that
+> makes a simple loop look like a Spring Boot migration.
+
+### Specific Callouts
+
+**1. Package Naming Nightmares**
+📁 `src/main/java/com/seriouscompany/business/java/fizzbuzz/packagenamingpackage/impl/`
+
+com.seriouscompany.business.java.fizzbuzz.packagenamingpackage.impl? Did a committee vote on
+this? Your directory structure has more layers than an onion made of bureaucracy.
+
+**2. Strategy Pattern Overdose**
+
+Using a Strategy pattern to decide whether to print 'Fizz' is like hiring a logistics
+consultant to mail a postcard.
+
+**3. Documentation Bloat**
+
+100% comment coverage on FizzBuzz implies you're documenting what System.out.println does.
+
+**4. Class Explosion**
+
+89 files for logic that fits in a tweet. Your cyclomatic complexity is low, but your
+cognitive load is astronomical.
+
+### Final Verdict
+
+> *"If I see one more FactoryFactory interface for a string concatenation, I'm committing arson."*
+
+---
+
+## 🗂️ Project Structure
+
+```
+codebase-roast/
+├── src/                        # CLI source (TypeScript/CJS)
+│   ├── index.ts                # Entry point — CLI args, orchestration, cleanup
+│   ├── analyzer.ts             # Static analysis: long files, functions, naming, copy-paste, complexity
+│   ├── roaster.ts              # LLM call (OpenAI-compatible SDK) + JSON parsing
+│   ├── reporter.ts             # ANSI terminal output + markdown report generation
+│   ├── providers.ts            # Provider auto-detection (Anthropic / Nebius / OpenAI / custom)
+│   └── types.ts                # Shared TypeScript interfaces
+├── web/                        # Next.js web app
+│   └── src/
+│       ├── app/                # Next.js App Router (layout, page, globals.css)
+│       └── lib/                # Browser-compatible analysis + GitHub API + roaster
+├── dist/                       # Compiled CLI output (git-ignored)
+├── .env.example                # Provider configuration template
+└── package.json                # CLI package — bin: codebase-roast
+```
+
+---
+
+## 🛠️ Tech Stack
+
+- **Runtime:** Node.js ≥ 18, TypeScript
+- **LLM:** Claude Opus via Anthropic API (or any OpenAI-compatible endpoint)
+- **Git:** `simple-git` for shallow cloning
+- **Web:** Next.js 14, Tailwind CSS, React 18
+- **GitHub API:** REST API for repo tree + file content (web mode)
+
+---
+
+## 🪞 Self-Roast
+
+Even this repo has faced the tribunal.
+
+[![Roast Score](https://img.shields.io/badge/roast_score-7%2F10-ff8c00)](https://codebase-roast.vercel.app)
+
+> *"Solid with minor sins — the irony of a code-quality tool with a 300-line analyzer is not lost on this reviewer."*
+
+---
+
+## 🤝 Contributing
+
+PRs welcome. Bad code especially.
+
+---
+
+## 📄 License
 
 MIT

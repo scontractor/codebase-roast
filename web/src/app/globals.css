@@ -1,0 +1,269 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --fire-red: #ff2200;
+  --fire-orange: #ff4500;
+  --fire-amber: #ff8c00;
+  --bg: #080808;
+  --bg-card: #0f0f0f;
+  --text: #c8b8a8;
+  --text-dim: #5a4a3e;
+  --border: #1e1414;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+/* ── Scanline overlay ───────────────────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0, 0, 0, 0.06) 3px,
+    rgba(0, 0, 0, 0.06) 4px
+  );
+  pointer-events: none;
+  z-index: 9998;
+}
+
+/* ── Glitch text ────────────────────────────────────────────────────────── */
+.glitch {
+  position: relative;
+  animation: glitch-main 8s infinite;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.glitch::before {
+  color: var(--fire-orange);
+  animation: glitch-layer-1 8s infinite;
+  text-shadow: none;
+}
+
+.glitch::after {
+  color: #00e5ff;
+  animation: glitch-layer-2 8s infinite;
+  text-shadow: none;
+}
+
+@keyframes glitch-main {
+  0%, 88%, 100% { transform: translate(0); }
+  89%           { transform: translate(3px, 0); }
+  90%           { transform: translate(-3px, 0); }
+  91%           { transform: translate(0); }
+  93%           { transform: translate(2px, -1px); }
+  94%           { transform: translate(-2px, 1px); }
+  95%           { transform: translate(0); }
+}
+
+@keyframes glitch-layer-1 {
+  0%, 87%, 100% {
+    opacity: 0;
+    clip-path: inset(0 0 100% 0);
+    transform: translate(0);
+  }
+  88% {
+    opacity: 1;
+    clip-path: inset(20% 0 55% 0);
+    transform: translate(-4px, 0);
+  }
+  89% {
+    opacity: 1;
+    clip-path: inset(65% 0 10% 0);
+    transform: translate(4px, 0);
+  }
+  90% {
+    opacity: 0;
+    clip-path: inset(0 0 100% 0);
+    transform: translate(0);
+  }
+}
+
+@keyframes glitch-layer-2 {
+  0%, 91%, 100% {
+    opacity: 0;
+    clip-path: inset(0 0 100% 0);
+    transform: translate(0);
+  }
+  92% {
+    opacity: 1;
+    clip-path: inset(45% 0 30% 0);
+    transform: translate(5px, 0);
+  }
+  93% {
+    opacity: 1;
+    clip-path: inset(10% 0 70% 0);
+    transform: translate(-5px, 0);
+  }
+  94% {
+    opacity: 0;
+    clip-path: inset(0 0 100% 0);
+    transform: translate(0);
+  }
+}
+
+/* ── Fire glow text ─────────────────────────────────────────────────────── */
+.fire-text {
+  color: var(--fire-orange);
+  text-shadow:
+    0 0 6px var(--fire-orange),
+    0 0 20px var(--fire-red);
+  animation: fire-pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes fire-pulse {
+  0%, 100% {
+    text-shadow:
+      0 0 6px var(--fire-orange),
+      0 0 20px var(--fire-red);
+  }
+  50% {
+    text-shadow:
+      0 0 10px var(--fire-amber),
+      0 0 30px var(--fire-orange),
+      0 0 50px var(--fire-red);
+  }
+}
+
+/* ── Blinking cursor ────────────────────────────────────────────────────── */
+.cursor::after {
+  content: '█';
+  animation: cursor-blink 1s step-end infinite;
+  color: var(--fire-orange);
+  margin-left: 1px;
+}
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* ── Flicker ────────────────────────────────────────────────────────────── */
+.flicker {
+  animation: flicker 6s linear infinite;
+}
+
+@keyframes flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+  20%, 24%, 55% { opacity: 0.85; }
+}
+
+/* ── Input styles ───────────────────────────────────────────────────────── */
+.roast-input {
+  background: #0c0c0c;
+  border: 1px solid #2a1a14;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.875rem;
+  padding: 0.625rem 0.875rem;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.roast-input::placeholder {
+  color: var(--text-dim);
+}
+
+.roast-input:focus {
+  border-color: var(--fire-orange);
+  box-shadow: 0 0 0 1px var(--fire-orange), 0 0 12px rgba(255, 69, 0, 0.15);
+}
+
+/* ── Score bar ──────────────────────────────────────────────────────────── */
+.score-bar-fill {
+  background: linear-gradient(90deg, var(--fire-red), var(--fire-orange), var(--fire-amber));
+  box-shadow: 0 0 8px var(--fire-orange);
+  transition: width 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ── Callout card ───────────────────────────────────────────────────────── */
+.callout-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--fire-orange);
+  padding: 1rem 1.25rem;
+  transition: border-color 0.15s;
+}
+
+.callout-card:hover {
+  border-left-color: var(--fire-red);
+}
+
+/* ── Scrollbar ──────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: #2a1a14; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--fire-dim, #7a2000); }
+
+/* ── Button ─────────────────────────────────────────────────────────────── */
+.btn-fire {
+  background: transparent;
+  border: 1px solid var(--fire-orange);
+  color: var(--fire-orange);
+  font-family: inherit;
+  font-size: 0.875rem;
+  letter-spacing: 0.1em;
+  padding: 0.625rem 1.5rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, box-shadow 0.15s;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-fire:hover:not(:disabled) {
+  background: var(--fire-orange);
+  color: #000;
+  box-shadow: 0 0 20px rgba(255, 69, 0, 0.4);
+}
+
+.btn-fire:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn-fire-solid {
+  background: var(--fire-orange);
+  color: #000;
+  border: 1px solid var(--fire-orange);
+  font-family: inherit;
+  font-size: 0.875rem;
+  letter-spacing: 0.1em;
+  padding: 0.625rem 1.5rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: 700;
+  transition: background 0.15s, box-shadow 0.15s;
+}
+
+.btn-fire-solid:hover {
+  background: var(--fire-amber);
+  box-shadow: 0 0 20px rgba(255, 69, 0, 0.5);
+}
